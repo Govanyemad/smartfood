@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اصنع طبقك</title>
+  <style>
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          direction:rtl;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Cairo', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            overflow-x: hidden; /* لإزالة أي تمرير أفقي */
+        }
+
+        /* Fullscreen Layout */
+        header, footer {
+            width: 100vw;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            font-size: 1.5rem;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        nav {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 123, 255, 0.9);
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 250px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffe400;
+        }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    section {
+      display: none;
+    }
+
+    .slide-active {
+      display: block;
+    }
+
+    .slide1, .slide2, .slide3, .slide4 {
+      text-align: center;
+    }
+
+    .next, .start, #generateMeal {
+      background-color: #6f4e37;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .next:hover, .start:hover, #generateMeal:hover {
+      background-color: #8a6a4f;
+    }
+
+    #ing {
+      padding: 10px;
+      width: 80%;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .progressbar {
+      height: 10px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+      display: flex;
+    }
+
+    .progress-step {
+      flex: 1;
+      height: 100%;
+      background-color: #f1f1f1;
+      transition: background-color 0.3s ease;
+    }
+
+    .progress-step-active {
+      background-color: #6f4e37;
+    }
+
+
+
+.me {
+  font-size: 1em; 
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4e50, #f9d423, #6dd5ed, #7b4397);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 2s infinite linear;
+  position: relative;
+}
+
+
+@keyframes shine {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+
+.me::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: shine-light 2s infinite linear;
+}
+
+@keyframes shine-light {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position:relative;
+            bottom:0;             
+                             }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                justify-content: space-between;
+                padding: 15px;
+            }
+
+            nav {
+                width: 100%;
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+  
+  
+
+   .mlogo {
+      font-size: 2em;
+      font-weight: bold;
+      background: linear-gradient(90deg, #28a745, #a1e6a3);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shine 2s infinite linear;
+      position: relative;
+    }
+
+    
+
+    .mlogo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      ;
+    
+
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header style="direction:ltr;">
+        <div class="logo" >
+            <span class="mlogo">Smart Food ♻️</span>
+        </div>
+        <button class="menu-btn" id="menuToggle">☰ القائمة</button>
+        <nav id="menu">
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="index.html#donate">تبرع</a></li>
+                <li><a href="#about">عن الموقع</a></li>
+            </ul>
+        </nav>
+    </header>
+
+  
+  <main>
+    <div class="container">
+      <section class="slide1 slide-active">
+        <h2>مرحباً 👋</h2>
+        <p>انا نموذج الذكاء الاصطناعي <span class="me">"إريا"</span> وانا هنا لمساعدتك في إعداد وجبتك</p>
+        <button class="next">جاهز</button>
+      </section>
+      
+      <section class="slide2">
+        <h3>أدخل بياناتك</h3>
+        <label for="weight">الوزن (كجم):</label>
+        <input type="number" id="weight" required>
+        <br>
+        <label for="height">الطول (سم):</label>
+        <input type="number" id="height" required>
+        <br>
+        <label for="age">العمر:</label>
+        <input type="number" id="age" required>
+        <br>
+        <label for="gender">الجنس:</label>
+        <select id="gender">
+          <option value="">اختر الجنس</option>
+          <option value="male">ذكر</option>
+          <option value="female">أنثى</option>
+        </select>
+        <br>
+        <label for="activity">عامل النشاط:</label>
+        <select id="activity">
+          <option value="">إختر عامل النشاط</option>
+          <option value="sedentary">قليل النشاط</option>
+          <option value="light">نشاط خفيف</option>
+          <option value="moderate">نشاط معتدل</option>
+          <option value="active">نشاط عالي</option>
+          <option value="very_active">نشاط مكثف</option>
+        </select>
+        <br>
+        <label for="meals">عدد الوجبات اليومية:</label>
+        <input type="number" id="meals" required>
+        <br>
+        <button id="calculateBMR" class="next">احسب السعرات</button>
+      </section>
+      
+      <section class="slide3">
+        <h3>ما هي المكونات المتوفرة لديك؟</h3>
+        <input id="ing" type="text" placeholder="أدخل المكونات">
+       <br>
+       <label for="repa">نوع الوجبة : </label>
+        <select id="repa">
+        <option value="">إختر نوع الوجبة</option>
+          <option value="الفطور"> وجبة للإفطار</option>
+          <option value="الغداء"> وجبة للغداء</option>
+          <option value="وقت الفراغ كتصبيرة"> وجبة خفيفة</option>
+          <option value="العشاء"> وجبة للعشاء</option>
+        </select>
+       <br>
+        <button id="generateMeal" disabled>تجهيز الأكلة</button>
+      </section>
+      
+      <section class="slide4">
+        <div id="result"></div>
+        <button class="start">اصنع أكلة جديدة</button>
+      </section>
+      
+      <div class="progressbar">
+        <div class="progress-step progress-step-active"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <p>&copy; 2024 موقع التوعية بأهمية الغذاء. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.container section');
+  const nextBtns = document.querySelectorAll('.next');
+  const startBtn = document.querySelector('.start');
+  const progressSteps = document.querySelectorAll('.progress-step');
+  const generateMealBtn = document.getElementById('generateMeal');
+  const resultDiv = document.getElementById('result');
+  const ingredientsInput = document.getElementById('ing');
+  const repaInput = document.getElementById('repa');
+  const weightInput = document.getElementById('weight');
+  const heightInput = document.getElementById('height');
+  const ageInput = document.getElementById('age');
+  const genderInput = document.getElementById('gender');
+  const activityInput = document.getElementById('activity');
+  const mealsInput = document.getElementById('meals');
+
+  let currentSlide = 0;
+
+  // التحقق من وجود البيانات المحفوظة عند تحميل الصفحة
+  fetch('get.php')
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        // تخطي السلايدات التي تطلب الوزن والطول وما إلى ذلك إذا كانت البيانات موجودة
+        currentSlide = slides.length - 2;
+        updateSlide();
+      }
+    })
+    .catch(error => console.error('Error fetching BMR data:', error));
+
+  // المستمع لأزرار الانتقال
+  nextBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentSlide++;
+      updateSlide();
+    });
+  });
+
+  startBtn.addEventListener('click', () => {
+    currentSlide = 0;
+    updateSlide();
+  });
+
+  function updateSlide() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('slide-active', index === currentSlide);
+    });
+    updateProgressBar();
+  }
+
+  function updateProgressBar() {
+    progressSteps.forEach((step, index) => {
+      step.classList.toggle('progress-step-active', index <= currentSlide);
+    });
+
+    const progressPercentage = (currentSlide / (slides.length - 1)) * 100;
+    progressSteps[0].parentNode.style.width = `${progressPercentage}%`;
+  }
+
+  // حساب القيم
+  function calculateBMR(weight, height, age, gender) {
+    if (gender === 'male') {
+      return 10 * weight + 6.25 * height - 5 * age + 5;
+    } else {
+      return 10 * weight + 6.25 * height - 5 * age - 161;
+    }
+  }
+
+  function calculateDailyCalories(bmr, activityFactor) {
+    switch (activityFactor) {
+      case 'sedentary':
+        return bmr * 1.2;
+      case 'light':
+        return bmr * 1.375;
+      case 'moderate':
+        return bmr * 1.55;
+      case 'active':
+        return bmr * 1.725;
+      case 'very_active':
+        return bmr * 1.9;
+      default:
+        return bmr;
+    }
+  }
+
+  function calculateMacronutrients(dailyCalories) {
+    const carbohydrates = 0.5 * dailyCalories / 4; 
+    const proteins = 0.3 * dailyCalories / 4; 
+    const fats = 0.2 * dailyCalories / 9; 
+    return [carbohydrates, proteins, fats];
+  }
+
+  function calculateMacronutrientsPerMeal(carbohydrates, proteins, fats, numMeals) {
+    const carbsPerMeal = carbohydrates / numMeals;
+    const proteinsPerMeal = proteins / numMeals;
+    const fatsPerMeal = fats / numMeals;
+    return [carbsPerMeal, proteinsPerMeal, fatsPerMeal];
+  }
+
+  // تفعيل الزر عندما يتم إدخال مكونات الوجبة
+  ingredientsInput.addEventListener('input', () => {
+    generateMealBtn.disabled = ingredientsInput.value.trim() === '';
+  });
+
+  // حساب القيم عند الضغط على "جاهز" وحفظها باستخدام PHP
+  generateMealBtn.addEventListener('click', async () => {
+    const weight = parseFloat(weightInput.value);
+    const height = parseFloat(heightInput.value);
+    const age = parseInt(ageInput.value, 10);
+    const gender = genderInput.value;
+    const activityFactor = activityInput.value;
+    const numMeals = parseInt(mealsInput.value, 10);
+
+    const bmr = calculateBMR(weight, height, age, gender);
+    const dailyCalories = calculateDailyCalories(bmr, activityFactor);
+    const [carbohydrates, proteins, fats] = calculateMacronutrients(dailyCalories);
+
+    const bmrData = {
+      bmr: bmr,
+      dailyCalories: dailyCalories,
+      carbohydrates: carbohydrates,
+      proteins: proteins,
+      fats: fats
+    };
+
+    // إرسال البيانات إلى PHP لحفظها في ملف JSON
+    try {
+      await fetch('save.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bmrData)
+      });
+
+      console.log('Data saved successfully');
+    } catch (error) {
+      console.error('Error saving BMR data:', error);
+    }
+
+    const ingredients = ingredientsInput.value.trim();
+    const repa = repaInput.value;
+
+    const bmrInfo = `
+      معدل الأيض الأساسي (BMR): ${bmr.toFixed(2)} سعر حراري<br>
+      السعرات الحرارية اليومية: ${dailyCalories.toFixed(2)} سعر حراري<br>
+      الكربوهيدرات اليومية: ${carbohydrates.toFixed(2)} جرام<br>
+      البروتينات اليومية: ${proteins.toFixed(2)} جرام<br>
+      الدهون اليومية: ${fats.toFixed(2)} جرام
+    `;
+
+    const apiKey = 'vIof2VIDlJfeC5dtjS5yuT9Ont05rpD1lHVdUWrk';
+    const prompt = `عاوز اقتراح لوجبه اعملها في ${repa}. المكونات المتوفرة: ${ingredients}. ${bmrInfo}`;
+
+    try {
+      const response = await fetch('https://api.cohere.ai/generate', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'command-xlarge-nightly',
+          prompt: prompt,
+          max_tokens: 300,
+          temperature: 0.7,
+          k: 0,
+          p: 0.75,
+          frequency_penalty: 0,
+          presence_penalty: 0,
+          stop_sequences: [],
+          return_likelihoods: 'NONE'
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.text) {
+        resultDiv.innerHTML = markdownToHtml(data.text);
+        currentSlide++;
+        updateSlide();
+      } else {
+        throw new Error('لم يتم تقديم اقتراح وجبة.');
+      }
+    } catch (error) {
+      console.error('حدث خطأ أثناء تجهيز الأكلة:', error);
+      resultDiv.innerHTML = '<p>عذراً، حدث خطأ أثناء تجهيز الأكلة. يرجى المحاولة مرة أخرى.</p>';
+    }
+  });
+});
+
+function markdownToHtml(markdown) {
+  let html = markdown
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+    .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+    .replace(/\*(.*)\*/gim, '<i>$1</i>')
+    .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
+    .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+    .replace(/\n$/gim, '<br />');
+
+  return html.trim();
+}
+</script>
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

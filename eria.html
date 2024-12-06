@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع الغذاء - ملء الشاشة</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          direction:rtl;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: "Cairo", sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            overflow-x: hidden; /* لإزالة أي تمرير أفقي */
+        }
+
+        /* Fullscreen Layout */
+        header, footer {
+            width: 100vw;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            font-size: 1.5rem;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        nav {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 123, 255, 0.9);
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 250px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffe400;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.8), rgba(102, 16, 242, 0.8)), url("banner-image.jpg") center/cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            animation: fadeInDown 1.5s ease forwards;
+        }
+
+        .hero p {
+            margin-top: 10px;
+            font-size: 1.4rem;
+            opacity: 0.9;
+        }
+
+        /* Keyframes for Banner Animation */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                justify-content: space-between;
+                padding: 15px;
+            }
+
+            nav {
+                width: 100%;
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+  
+  
+  
+    .btn, .start, #generateMeal {
+      background-color: #60e030;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .btn:hover, .start:hover, #generateMeal:hover {
+      background-color: #8a6a4f;
+    }
+  
+  .me {
+  font-size: 1em; 
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4e50, #f9d423, #6dd5ed, #7b4397);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 2s infinite linear;
+  position: relative;
+}
+
+
+@keyframes shine {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+
+.me::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: shine-light 2s infinite linear;
+}
+
+@keyframes shine-light {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+  
+   .mlogo {
+      font-size: 2em;
+      font-weight: bold;
+      background: linear-gradient(90deg, #28a745, #a1e6a3);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shine 2s infinite linear;
+      position: relative;
+    }
+
+    
+
+    .mlogo::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      ;
+    
+
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header style="direction:ltr;">
+        <div class="logo" >
+            <span class="mlogo">Smart Food ♻️</span>
+        </div>
+        <button class="menu-btn" id="menuToggle">☰ القائمة</button>
+        <nav id="menu">
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#donate">تبرع</a></li>
+                <li><a href="about.html">عن الموقع</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div>
+            <h1>أهلاً بك في موقع التوعية بأهمية الغذاء</h1>
+            <p>نساعد في توعية المجتمع بأهمية الغذاء وعدم إهداره.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+      
+     <h2>توفير الطعام</h2>  <br><br>
+      <div class="card"> 
+     <h3>أكلاتك ديجيتال</h3>
+     <p> سنأخذك في مغامرة مليئة بالتشويق .<br> سنساعدك في توظيف مواردك البسيطة في صنع أكلات لذيذة وشهية عن طريق الذكاء الاصطناعي .<br> حتي إن لم يكن لديك خبرة في الطبخ ستحضر أشهر الأكلات .</p>
+        <center> <button class="btn" onclick="location.href='dmaker.html'"> اصنع طبقك</button> </center>
+      </div>    
+            <br><br><br><br><br>  
+           <br><hr>     <br>
+        <h2>خدماتنا</h2><br><br><br>
+        <div class="cards" id="donate">
+            <div class="card" onclick="location.href='mdonate.html'">
+                <h3>تبرع بالمال</h3>
+                <p>تبرع للمساهمة في مكافحة إهدار الطعام.</p>
+            </div>
+                      <div class="card" onclick="document.querySelector(`.nd`).style.display = `block`;
+">
+                <h3>تبرع بالطعام</h3>
+                <p>ساعد الآخرين من خلال التبرع بالطعام الزائد لديك.</p>
+                        <div class="nd" style="display:none;"><p>للتبرع بالطعام توجه لأقرب صندوق <span class="me">"إريا"</span> منك .<br>لعرض خريطة بأماكن صناديق <span class="me">"إريا"</span> إضغط عرض 👇</p>
+                        <button class="btn" onclick="location.href='dmap.html'">عرض</button>
+                        </div>
+      
+            </div>
+          <div class="card" onclick="location.href='ndonate.php'">
+                <h3>تبرع بالمستلزمات</h3>
+                <p>ساعد الآخرين من خلال التبرع بالمستلزمات الاساسية ولاغراض التي لا تجتاجها .</p>
+                  </div>
+            <div class="card" onclick="document.querySelector('.taw').style.display = `block`;
+">
+                <h3>التوعية الغذائية</h3>
+                <p>نشر الوعي حول أهمية الغذاء وإدارة الموارد.</p><br>
+              <div class="taw" style="display:none;">
+
+
+
+<div class="content">
+    <!-- First Section -->
+    <section class="section-block">
+        <div class="section-block-content">
+            <h2>حقائق حول هدر الطعام</h2>
+            <p>حول هدر الطعام: إن إهدار الطعام يشكل تحديًا عالميًا. ويساعدنا فهم حجمه وتأثيره في إحداث فرق حقيقي نحو الأفضل. دعونا نتعمق في الحقائق والإحصائيات حول موضوع إهدار الطعام.</p>
+
+            <h3>ما هي كمية الطعام المهدرة على مستوى العالم؟</h3>
+            <p>وفقًا لصندوق الحياة البرية العالمي (2021)، فإن 40% من الطعام الذي ننتجه على مستوى العالم يضيع. وهذا يعني أن 2.5 مليار طن من الطعام تهدر كل عام. وهذا يعادل 80 ألف كيلوغرام من الطعام يهدر حول العالم كل ثانية.</p>
+
+            <h3>ما هو الطعام الذي يتم إهداره أكثر؟</h3>
+            <p>يظهر هدر الطعام في كل فئة من فئات الأغذية تقريبًا. وفي المتوسط، تعد الخضروات (25%) والحبوب (24%) والفواكه (12%) من أكثر الأطعمة المهدرة في المنزل في جميع أنحاء العالم.</p>
+            <p>عندما يتعلق الأمر بإهدار الغذاء في الأسر الاستهلاكية، فإن الخضروات والحبوب والفواكه تتبعها الجذور والدرنات (9٪) ومنتجات الألبان والبيض (7٪) واللحوم والأسماك (6٪) (تشين، 2020).</p>
+        </div>
+    </section>
+
+    <!-- Second Section -->
+    <section class="section-block">
+        <div class="section-block-content">
+            <h2>تعريف هدر الطعام</h2>
+            <p>عندما نتحدث عن هدر الطعام، فإننا نشير إلى كل الأطعمة المخصصة للاستهلاك البشري والتي تذهب إلى النفايات، من المزرعة إلى المائدة.</p>
+            <p>ويتضمن ذلك "فقد الغذاء" - الغذاء المهدر كجزء من سلاسل الإنتاج والتوريد - و"هدر الغذاء" الذي يحدث على مستوى البيع بالتجزئة و/أو في الأسر الاستهلاكية.</p>
+        </div>
+    </section>
+
+    <!-- New Section: الفرق بين فقدان الغذاء وهدر الغذاء -->
+    <section class="section-block">
+        <div class="section-block-content">
+            <h2>الفرق بين فقدان الغذاء وهدر الغذاء</h2>
+            <p>يحدث فقدان الغذاء في مرحلة مبكرة من سلسلة التوريد ولا يعود هذا الغذاء إلى سلسلة التوريد لأي استخدام إنتاجي آخر، مثل علف الحيوانات. ويحدث ذلك عند الحصاد أو الذبح أو الصيد، أي قبل أن يصل الغذاء إلى أرفف المتاجر أو المطاعم أو مقدمي خدمات الأغذية أو المستهلك النهائي. تُعرف منظمة الأغذية والزراعة التابعة للأمم المتحدة (الفاو، 2019) فقدان الغذاء بأنه "انخفاض في كمية أو جودة الغذاء نتيجة لقرارات وإجراءات موردي الأغذية في السلسلة، باستثناء تجار التجزئة ومقدمي خدمات الأغذية والمستهلكين". يمكن أن يحدث هذا الفقد في الغذاء لأسباب عديدة مختلفة.</p>
+            <p>ووفقًا للصندوق العالمي للحياة البرية (2021)، يحدث 1.2 مليار طن من فقدان الغذاء في المزارع كل عام.</p>
+            <p>يحدث هدر الطعام في نهاية سلسلة التوريد، على سبيل المثال عندما يصل الطعام إلى تجار التجزئة ومحلات البقالة ومقدمي خدمات الأغذية والأسر المستهلكة. تُعرِّف منظمة الأغذية والزراعة هدر الطعام بأنه "انخفاض في كمية أو جودة الطعام نتيجة لقرارات وإجراءات تجار التجزئة وخدمات الأغذية والمستهلكين" (منظمة الأغذية والزراعة، 2019).</p>
+        </div>
+    </section>
+
+    <!-- Third Section -->
+    <section class="section-block">
+        <div class="section-block-content">
+            <h2>فرصة حقيقية لمعالجة تغير المناخ</h2>
+            <p>إن تقليل هدر الطعام هو الإجراء رقم 1 الذي يمكننا اتخاذه للمساعدة في معالجة تغير المناخ، من خلال الحد من ارتفاع درجة الحرارة إلى درجتين مئويتين بحلول عام 2100 (Project Drawdown، 2020). سهل وفعال ومجزٍ - يساعدنا تقليل أو تجنب هدر الطعام في إحداث تأثير إيجابي حقيقي على البيئة.</p>
+        </div>
+    </section>
+
+    <!-- Fourth Section -->
+    <section class="section-block">
+        <div class="section-block-content">
+            <h2>كيف يؤثر هدر الطعام على البيئة والمناخ؟</h2>
+            <p>كجزء من عملية إنتاج الغذاء، يتم إطلاق انبعاثات الغازات المسببة للاحتباس الحراري في الغلاف الجوي. بالإضافة إلى ذلك، فإن نظام الغذاء له تأثير على فقدان التنوع البيولوجي والنظم البيئية لدينا. عندما يتم إهدار الطعام، فإننا لا نهدر الطعام الموجود أمامنا فحسب، بل نهدر أيضًا جميع الموارد القيمة التي دخلت في صنع الطعام. وبالتالي، فإن إهدار الطعام له تأثير كبير على البيئة ومناخ كوكبنا.</p>
+        </div>
+    </section>
+</div>
+
+
+
+                
+              </div>
+            </div>
+        </div>
+    </div>
+<br><br><br><br><br>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 جميع الحقوق محفوظة - موقع التوعية بأهمية الغذاء</p>
+    </footer>
+
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const menu = document.getElementById("menu");
+
+        menuToggle.addEventListener("click", () => {
+            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+        });
+    </script>
+
+</body>
+</html>

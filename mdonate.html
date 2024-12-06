@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التبرع بالمال</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background-color: #f0f8ff; /* خلفية زرقاء فاتحة */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* خلفية بيضاء مع شفافية */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px; /* تقليل العرض */
+            width: 100%;
+        }
+        h1 {
+            color: #007bff; /* أزرق */
+            margin-bottom: 20px;
+        }
+        .donation-amounts button, .form-group input[type="number"], .payment-methods button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .donation-amounts button {
+            background-color: #007bff; /* لون أزرق للأزرار */
+            color: white;
+            cursor: pointer;
+        }
+        .donation-amounts button:hover {
+            background-color: #0056b3; /* لون أغمق عند التمرير */
+        }
+        .form-group input[type="number"] {
+            width: 80%; /* تقليل العرض ليكون ضمن الحواف */
+            padding: 8px; /* تقليل الحشوة */
+            border: 1px solid #007bff; /* إطار أزرق */
+            border-radius: 5px;
+        }
+        button.submit-btn {
+            padding: 12px 20px; /* تقليل الحشوة */
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button.submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .payment-methods button {
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%; /* لجعل الأزرار تملأ العرض */
+            margin-bottom: 10px; /* مسافة بين الأزرار */
+        }
+        .payment-methods button.wallet {
+            background-color: #ff6f61; /* محافظ إلكترونية */
+        }
+        .payment-methods button.bitcoin {
+            background-color: #f7931a; /* بتكوين */
+        }
+        .payment-methods button.paypal {
+            background-color: #0070ba;
+        }
+        .payment-methods button.credit {
+            background-color: #343a40;
+        }
+        .payment-methods button:hover {
+            opacity: 0.8;
+        }
+        .wallet-details {
+            margin-top: 20px;
+            display: none; /* سيتم إظهارها عند اختيار محافظ إلكترونية */
+        }
+        .wallet-details p {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .wallet-details input[type="file"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- اختيار المبلغ -->
+        <div id="amount-section">
+            <h1>حدد مبلغ التبرع</h1>
+            <div class="donation-amounts">
+                <button type="button" onclick="setAmount(50)">50 جنيه</button>
+                <button type="button" onclick="setAmount(100)">100 جنيه</button>
+                <button type="button" onclick="setAmount(200)">200 جنيه</button>
+            </div>
+            <div class="form-group">
+                <input type="number" id="custom-amount" name="amount" placeholder="أدخل مبلغ آخر">
+            </div>
+            <button type="button" class="submit-btn" onclick="showPaymentMethods()">التالي</button>
+        </div>
+
+        <!-- اختيار طريقة الدفع -->
+        <div id="payment-section" class="hidden">
+            <h1>اختر طريقة الدفع</h1>
+            <p>مبلغ التبرع: <span id="donation-amount"></span> جنيه</p>
+            <div class="payment-methods">
+                <button class="wallet" onclick="selectPayment('محافظ إلكترونية')">محافظ إلكترونية</button>
+                <button class="bitcoin" onclick="selectPayment('بتكوين')">بتكوين</button>
+                <button class="paypal" onclick="selectPayment('باي بال')">باي بال</button>
+                <button class="credit" onclick="selectPayment('بطاقة ائتمان')">بطاقة ائتمان</button>
+            </div>
+
+            <!-- تفاصيل المحافظ الإلكترونية -->
+            <div class="wallet-details" id="wallet-details">
+                <p>رقم المحفظة: 01208487295</p>
+                <label for="receipt">إرفاق صورة الإيصال:</label>
+                <input type="file" id="receipt" name="receipt">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setAmount(amount) {
+            document.getElementById('custom-amount').value = amount;
+        }
+
+        function showPaymentMethods() {
+            const amount = document.getElementById('custom-amount').value;
+            document.getElementById('donation-amount').textContent = amount;
+            document.getElementById('amount-section').classList.add('hidden');
+            document.getElementById('payment-section').classList.remove('hidden');
+        }
+
+        function selectPayment(method) {
+            const amount = document.getElementById('donation-amount').textContent;
+            if (method === 'محافظ إلكترونية') {
+                document.getElementById('wallet-details').style.display = 'block';
+            } else {
+                document.getElementById('wallet-details').style.display = 'none';
+            }
+            alert(`لقد اخترت ${method} للدفع بمبلغ ${amount} جنيه.`);
+            // هنا يمكنك إضافة وظائف الدفع الخاصة
+        }
+    </script>
+</body>
+</html>
